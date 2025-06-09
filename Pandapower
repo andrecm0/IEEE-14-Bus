@@ -1,0 +1,31 @@
+Pandapower simulation:
+
+--- Commom operation---
+import pandapower.networks as pn
+import pandapower as pp
+
+# Carrega o sistema IEEE 14 barras
+net = pn.case14()
+
+pp.runpp(net)
+
+# Tensões nas barras
+display(net.res_bus[['vm_pu', 'va_degree']])
+
+--- Changing the Loads ----
+
+net = pn.case14()
+
+fator = 1.3  # 30% a mais
+net.load['p_mw'] *= fator
+net.load['q_mvar'] *= fator
+
+print("\n===== CARGAS =====")
+display(net.load)
+
+# Executa o fluxo de potência
+pp.runpp(net)
+
+# Tensões por barra
+display(net.res_bus[["vm_pu", "va_degree"]])
+
