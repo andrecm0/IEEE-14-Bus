@@ -1,3 +1,7 @@
 Curva de carga obtida pelo operador nacional do sistema
 A curva foi filtrada pela região sudeste
 https://dados.ons.org.br/dataset/curva-carga 
+
+# Normaliza para [0, 1]
+curva['fator_carga'] = curva['carga_mw'] / curva['carga_mw'].max()
+
