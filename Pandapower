@@ -12,20 +12,26 @@ pp.runpp(net)
 # Tensões nas barras
 display(net.res_bus[['vm_pu', 'va_degree']])
 
---- Changing the Loads ----
+------------------------------------------
 
 net = pn.case14()
 
+--- Changing the Loads ----
 fator = 1.3  # 30% a mais
 net.load['p_mw'] *= fator
 net.load['q_mvar'] *= fator
 
-print("\n===== CARGAS =====")
 display(net.load)
+
+--- Changing the Gen ----
+net.gen['p_mw'] *= fator
+
+display(net.gen)
+
+------------------------------------------
 
 # Executa o fluxo de potência
 pp.runpp(net)
 
 # Tensões por barra
 display(net.res_bus[["vm_pu", "va_degree"]])
-
